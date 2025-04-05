@@ -1,18 +1,18 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { SubcategoryService } from './subcategory.service';
+import { Test, TestingModule } from "@nestjs/testing";
+import { SubCategoriesService } from "./subcategory.service";
 
-describe('SubcategoryService', () => {
-  let service: SubcategoryService;
+describe("SubcategoryService", () => {
+  let service: SubCategoriesService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [SubcategoryService],
+      providers: [SubCategoriesService],
     }).compile();
 
-    service = module.get<SubcategoryService>(SubcategoryService);
+    service = module.get<SubCategoriesService>(SubCategoriesService);
   });
 
-  it('should be defined', () => {
+  it("should be defined", () => {
     expect(service).toBeDefined();
   });
 });

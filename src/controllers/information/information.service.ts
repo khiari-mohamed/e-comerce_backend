@@ -2,8 +2,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Information } from '../models/information';
-import * as cloudinary from '../utils/cloudinary';
+import { Information } from '../../models/information.schema';
+import * as cloudinary from '../../shared/utils/cloudinary/cloudinary/cloudinary.module';
 
 @Injectable()
 export class InformationService {

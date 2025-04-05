@@ -1,12 +1,15 @@
 // products.module.ts (updated)
-import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
-import { ProductsController } from './products.controller';
-import { ProductsService } from './products.service';
-import { Product, ProductSchema } from '../schemas/product.schema';
-import { Category, CategorySchema } from '../schemas/category.schema';
-import { SubCategory, SubCategorySchema } from '../schemas/subcategory.schema';
-import { CloudinaryProvider } from './cloudinary.provider';
+import { Module } from "@nestjs/common";
+import { MongooseModule } from "@nestjs/mongoose";
+import { ProductsController } from "./product.controller";
+import { ProductsService } from "./product.service";
+import { Product, ProductSchema } from "../../models/product.schema";
+import { Category, CategorySchema } from "../../models/category.schema";
+import {
+  SubCategory,
+  SubCategorySchema,
+} from "../../models/sub-category.schema";
+import { CloudinaryProvider } from "../../controllers/cloudinary/cloudinary.provider";
 
 @Module({
   imports: [

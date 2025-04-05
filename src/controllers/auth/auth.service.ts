@@ -3,9 +3,9 @@ import { Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { compare, hash } from 'bcryptjs';
-import { AdminUser } from '../models/admin-user.model';
-import { Client } from '../models/client.model';
-import { createToken } from '../utils/tokenManager'; // Assuming the same utility is available
+import { AdminUser } from '../../models/admin-user.schema';
+import { Client } from '../../models/client.schema';
+import { createToken } from '../../shared/utils/tokens/token.service';
 
 @Injectable()
 export class AuthService {

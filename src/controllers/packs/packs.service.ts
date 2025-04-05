@@ -6,8 +6,8 @@ import {
   } from '@nestjs/common';
   import { InjectModel } from '@nestjs/mongoose';
   import { Model } from 'mongoose';
-  import * as cloudinary from '../utils/cloudinary';
-  import { Pack } from '../models/pack';
+  import * as cloudinary from '../../shared/utils/cloudinary/cloudinary/cloudinary.module';
+  import { Pack } from '../../models/pack.schema';
   import mongoose from 'mongoose';
   
   @Injectable()

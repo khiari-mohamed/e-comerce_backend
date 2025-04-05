@@ -9,19 +9,21 @@ import {
   import * as mongoose from 'mongoose';
   import * as cloudinary from 'cloudinary';
   import {
-    Product,
-    ProductDocument,
     Category,
-    CategoryDocument,
+  } from '../../models/category.schema';
+  import {
     SubCategory,
-    SubCategoryDocument,
-  } from '../schemas';
+  } from '../../models/sub-category.schema';
+  import { Product } from '../../models/product.schema';
   import {
     CreateProductDto,
+  } from './dto/create-product.dto';
+  import {
     UpdateProductDto,
-    DeleteManyProductsDto,
-    ProductQueryDto,
-  } from './dto';
+  } from './dto/update-product.dto';
+  import { ProductQueryDto } from './dto/product-query.dto';
+  import { DeleteManyProductsDto } from './dto/delete-many-products.dto';
+  
   
   @Injectable()
   export class ProductsService {

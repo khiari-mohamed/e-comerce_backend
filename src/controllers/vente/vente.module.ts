@@ -1,13 +1,16 @@
-import { Module } from '@nestjs/common';
-import { VentesController } from './ventes.controller';
-import { VentesService } from './ventes.service';
-import { MongooseModule } from '@nestjs/mongoose';
-import { Vente, VenteSchema } from '../models/Ventes';
-import { Client, ClientSchema } from '../models/Client';
-import { PromoCode, PromoCodeSchema } from '../models/PromoCode';
-import { Product, ProductSchema } from '../models/Product';
-import { Pack, PackSchema } from '../models/Pack';
-import { Information, InformationSchema } from '../models/Information';
+import { Module } from "@nestjs/common";
+import { VentesController } from "./vente.controller";
+import { VentesService } from "./vente.service";
+import { MongooseModule } from "@nestjs/mongoose";
+import { Vente, VenteSchema } from "../../models/vente.schema";
+import { Client, ClientSchema } from "../../models/client.schema";
+import { PromoCode, PromoCodeSchema } from "../../models/promo-code.schema";
+import { Product, ProductSchema } from "../../models/product.schema";
+import { Pack, PackSchema } from "../../models/pack.schema";
+import {
+  Information,
+  InformationSchema,
+} from "../../models/information.schema";
 
 @Module({
   imports: [

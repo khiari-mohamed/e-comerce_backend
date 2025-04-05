@@ -1,22 +1,22 @@
-import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { Blog } from './schemas/blog.schema';
-import { CreateBlogDto, UpdateBlogDto } from './dto';
-import { CloudinaryService } from '../cloudinary/cloudinary.service';
+import { Injectable } from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
+import { Blog } from "../../../models/blog.schema";
+import { CreateBlogDto, UpdateBlogDto } from "../dto/create-blog.dto";
+import { CloudinaryService } from "../../cloudinary/cloudinary.service";
 
 @Injectable()
 export class BlogService {
   constructor(
     @InjectModel(Blog.name) private blogModel: Model<Blog>,
-    private readonly cloudinaryService: CloudinaryService,
+    private readonly cloudinaryService: CloudinaryService
   ) {}
 
   async getAllBlogs() {
     return await this.blogModel
       .find({})
-      .sort('-createdAt')
-      .select('title cover.url createdAt updatedAt content slug')
+      .sort("-createdAt")
+      .select("title cover.url createdAt updatedAt content slug")
       .exec();
   }
 
@@ -41,19 +41,23 @@ export class BlogService {
 
   async deleteBlog(id: string) {
     const blog = await this.blogModel.findById(id);
-    if (!blog) throw new Error('Blog not found');
+    if (!blog) throw new Error("Blog not found");
 
     if (blog.cover && blog.cover.img_id) {
       await this.cloudinaryService.deleteImage(blog.cover.img_id);
     }
 
     await this.blogModel.findByIdAndDelete(id);
-    return { message: 'Blog deleted successfully' };
+    return { message: "Blog deleted successfully" };
   }
 
-  async updateBlog(id: string, updateBlogDto: UpdateBlogDto, file: Express.Multer.File) {
+  async updateBlog(
+    id: string,
+    updateBlogDto: UpdateBlogDto,
+    file: Express.Multer.File
+  ) {
     const blog = await this.blogModel.findById(id);
-    if (!blog) throw new Error('Blog not found');
+    if (!blog) throw new Error("Blog not found");
 
     let cover = blog.cover;
     if (file) {
@@ -68,24 +72,24 @@ export class BlogService {
     const updatedBlog = await this.blogModel.findByIdAndUpdate(
       id,
       { ...updateBlogDto, cover },
-      { new: true, runValidators: true },
+      { new: true, runValidators: true }
     );
     return updatedBlog;
   }
 
   async getBlogById(id: string) {
-    return await this.blogModel.findById(id).select('-_id -cover.img_id');
+    return await this.blogModel.findById(id).select("-_id -cover.img_id");
   }
 
   async getBlogBySlug(slug: string) {
-    return await this.blogModel.findOne({ slug }).select('-_id -cover.img_id');
+    return await this.blogModel.findOne({ slug }).select("-_id -cover.img_id");
   }
 
   async getLandingPageBlogs() {
     return await this.blogModel
       .find({ inLandingPage: true })
       .sort({ createdAt: -1 })
-      .select('title cover.url createdAt slug updatedAt -_id')
+      .select("title cover.url createdAt slug updatedAt -_id")
       .exec();
   }
 }

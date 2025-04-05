@@ -8,8 +8,7 @@ import {
   import { v2 as cloudinary } from 'cloudinary';
   import { CreatePageDto } from './dto/create-page.dto';
   import { UpdatePageDto } from './dto/update-page.dto';
-  import { Page } from '../models/Page';
-  
+  import { Page } from '../../models/page.schema';
   @Injectable()
   export class PagesService {
     constructor(@InjectModel(Page.name) private pageModel: Model<Page>) {}
