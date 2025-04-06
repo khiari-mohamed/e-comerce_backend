@@ -176,7 +176,7 @@ import {
           await Promise.all(
             product.images.map(img => 
               cloudinary.uploader.destroy(img.img_id)
-          );
+          ));
   
           // Upload new images
           const newImages = await Promise.all(
@@ -237,7 +237,7 @@ import {
         await Promise.all(
           product.images.map(img => 
             cloudinary.uploader.destroy(img.img_id)
-        );
+        ));
   
         await session.commitTransaction();
         return {
@@ -279,7 +279,7 @@ import {
           products.flatMap(product =>
             product.images.map(img => 
               cloudinary.uploader.destroy(img.img_id))
-        );
+        ));
   
         // Then delete products
         const deleteResult = await this.productModel

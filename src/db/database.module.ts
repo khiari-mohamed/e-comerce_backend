@@ -1,8 +1,8 @@
-import { Module } from '@nestjs/common';
-import { DatabaseService } from './database.provider';
+import { Module } from "@nestjs/common";
+import { DatabaseService } from "./database.provider";
 
 @Module({
   providers: [DatabaseService],
-  exports: [DatabaseService], // 🟢 Allows other modules to use it
+  exports: [DatabaseService], // makes it usable in other modules
 })
 export class DatabaseModule {}

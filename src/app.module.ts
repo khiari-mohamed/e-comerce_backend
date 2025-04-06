@@ -2,6 +2,7 @@ import { Module, MiddlewareConsumer, NestModule } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ConfigModule } from '@nestjs/config';
 
 // ======================
 // ALL ORIGINAL IMPORTS PRESERVED
@@ -43,7 +44,9 @@ import { SlugModule } from './shared/utils/generators/slug/slug.module'; // Repl
     // ======================
     // DATABASE (ORIGINAL)
     // ======================
-    MongooseModule.forRoot(process.env.MONGODB_URI || 'mongodb://localhost/nest'),
+    ConfigModule.forRoot({
+      isGlobal: true, // makes process.env accessible everywhere
+    }),
     DatabaseModule,
 
     // ======================

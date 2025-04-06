@@ -1,9 +1,8 @@
 import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
 import { connect, disconnect } from 'mongoose';
 
-@Injectable() // 🟢 Makes it injectable across the app
+@Injectable()
 export class DatabaseService implements OnModuleInit, OnModuleDestroy {
-  // 🟢 Using NestJS lifecycle hooks
   async onModuleInit() {
     await this.connectToDatabase();
   }
@@ -12,23 +11,26 @@ export class DatabaseService implements OnModuleInit, OnModuleDestroy {
     await this.disconnectFromDatabase();
   }
 
-  // ============== EXISTING LOGIC (COPIED VERBATIM) ==============
-  async connectToDatabase() {
+  private async connectToDatabase() {
     try {
-      await connect(process.env.MONGODB_URI);
-      console.log("Connected to database 🗃️");
+      const uri = process.env.MONGODB_URI;
+      if (!uri) throw new Error('❌ MONGODB_URI is not defined in .env file');
+
+      await connect(uri);
+      console.log('✅ Connected to MongoDB 🗃️');
     } catch (error) {
-      console.log(" ❌ Error connecting to database", error);
-      throw new Error("Error connecting to database");
+      console.error('❌ Database connection error:', error);
+      throw error;
     }
   }
 
-  async disconnectFromDatabase() {
+  private async disconnectFromDatabase() {
     try {
       await disconnect();
+      console.log('🔌 Disconnected from MongoDB');
     } catch (error) {
-      console.log(error);
-      throw new Error("Could not Disconnect From MongoDB");
+      console.error('❌ Error disconnecting from MongoDB:', error);
+      throw error;
     }
   }
 }
